@@ -1,0 +1,60 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.new-game-intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  overflow: hidden; 
+  flex-direction: column;
+  gap: 10px;
+}
+
+.new-game-container {
+  text-align: center;
+}
+
+.new-game-settings {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.new-game-form {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid gray;
+    padding: 50px;
+    border-radius: 10px;
+    color: white;
+    text-decoration-color: white;   
+    gap: 10px;
+}
+
+#gameName {
+    color: white;
+}
+
+.text-new-game .text-new-game.Mui-active .text-new-game.Mui-expanded {
+    color: green;
+}
+
+
+.line {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    align-items: center;
+    gap: 10px;
+}
