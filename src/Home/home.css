@@ -1,0 +1,11 @@
+.player-data-container {
+    background-color: rgb(27, 27, 27);
+    padding: 20px;
+    width: 300px;
+    gap: 10px;
+    margin: 5px;
+    position: absolute;
+    top: 0px;
+    border-radius: 10px;
+    border: 2px solid grey;
+}

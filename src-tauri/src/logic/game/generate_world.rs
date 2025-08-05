@@ -5,16 +5,10 @@ use shipyard::{ EntityId, World };
 
 use crate::new_game::RegisterData;
 use crate::core::{
-    AssetBelongsTo, AssetId, Assets, Company, CompanyId, Currency, Factory, Headquarters, Player, ASSET_ID_GENERATOR, COMPANY_ID_GENERATOR
+    AssetBelongsTo, AssetId, Assets, Company, CompanyId, Currency, Factory, Headquarters, Player, WorldData, ASSET_ID_GENERATOR, COMPANY_ID_GENERATOR
 };
 
 const COMPANIES: u64 = 1000;
-
-pub struct WorldData {
-    pub world: World,
-    pub assets: HashMap<u64, EntityId>,
-    pub companies: HashMap<u64, EntityId>,
-}
 
 pub fn generate_world(player_data: RegisterData) -> WorldData {
     let mut world = World::new();
@@ -27,7 +21,7 @@ pub fn generate_world(player_data: RegisterData) -> WorldData {
 
     generate_player(&mut world, player_data, &mut assets, &mut companies);
 
-    WorldData { world: world, assets: assets, companies: companies }
+    WorldData::new(world, assets, companies)
 }
 
 fn generate_company(

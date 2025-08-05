@@ -23,7 +23,7 @@ export default function NewGameSettings() {
     invoke<RegisterResult>('register', { game_name: gameName, company_name: companyName }).then((res: RegisterResult) => {
       setResult(res);
       if (res.success) {
-        navigate("./home")
+        navigate("../home")
       }
     })
   };

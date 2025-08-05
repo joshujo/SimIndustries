@@ -1,4 +1,4 @@
-use std::ops::{Add, Mul, Sub};
+use std::ops::{Add, AddAssign, Mul, Sub};
 
 use serde::{Deserialize, Serialize};
 
@@ -150,6 +150,12 @@ impl Mul<i32> for Currency {
     type Output = Self;
     fn mul(self, rhs: i32) -> Self::Output {
         Currency((self.0 * rhs as i128) as i128)
+    }
+}
+
+impl AddAssign for Currency {
+    fn add_assign(&mut self, rhs: Self) {
+        self.0 += rhs.0;
     }
 }
 
