@@ -2,6 +2,7 @@ import { TextField } from "@mui/material";
 import { useState } from "react";
 import { Button } from "@mui/material";
 import { invoke } from "@tauri-apps/api/core";
+import { useNavigate } from "react-router-dom";
 
 interface RegisterResult {
   success: boolean;
@@ -11,8 +12,9 @@ interface RegisterResult {
 export default function NewGameSettings() {
   const [gameName, setGameName] = useState<string>("");
   const [companyName, setCompanyName] = useState<string>("");
-
   const [result, setResult] = useState<RegisterResult | null>(null);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,6 +22,9 @@ export default function NewGameSettings() {
     console.log("Sending game_name: " + gameName + ", company name: " + companyName);
     invoke<RegisterResult>('register', { game_name: gameName, company_name: companyName }).then((res: RegisterResult) => {
       setResult(res);
+      if (res.success) {
+        navigate("./home")
+      }
     })
   };
 
