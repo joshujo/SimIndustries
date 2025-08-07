@@ -1,11 +1,13 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-pub mod new_game;
+pub mod interface;
 pub mod core;
 pub mod tokio;
 pub mod logic;
-use new_game::register;
+use parking_lot::Mutex;
 
-use crate::{logic::logic, new_game::Register};
+use interface::{register::register, retrieve_data::{retrieve_player_assets, unsub_retrieve_player_assets}};
+
+use crate::{ interface::{register::Register, retrieve_data::RetrieveData}, logic::logic };
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -14,10 +16,10 @@ fn greet(name: &str) -> String {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    tauri::Builder::default()
+    tauri::Builder
+        ::default()
         .setup(|app| {
             let app_handle = app.handle().clone();
-   
 
             std::thread::spawn(move || {
                 logic(app_handle);
@@ -27,9 +29,12 @@ pub fn run() {
         })
         .plugin(tauri_plugin_opener::init())
         .manage(Register::new())
+        .manage(Mutex::new(RetrieveData::default()))
         .invoke_handler(tauri::generate_handler![
-            greet,
-            register
+            greet, 
+            register,
+            retrieve_player_assets,
+            unsub_retrieve_player_assets
             ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -94,12 +94,68 @@ impl FromCent for f32 {
     }
 }
 
+pub trait FromMicrodollar {
+    fn to_microdollar(self) -> i128;
+}
+impl FromMicrodollar for i128 {
+    fn to_microdollar(self) -> i128 {
+        self
+    }
+}
+
+impl FromMicrodollar for i64 {
+    fn to_microdollar(self) -> i128 {
+        self as i128
+    }
+}
+
+impl FromMicrodollar for i32 {
+    fn to_microdollar(self) -> i128 {
+        self as i128
+    }
+}
+
+impl FromMicrodollar for u128 {
+    fn to_microdollar(self) -> i128 {
+        self as i128
+    }
+}
+
+impl FromMicrodollar for u64 {
+    fn to_microdollar(self) -> i128 {
+        self as i128
+    }
+}
+
+impl FromMicrodollar for u32 {
+    fn to_microdollar(self) -> i128 {
+        self as i128
+    }
+}
+
+impl FromMicrodollar for f64 {
+    fn to_microdollar(self) -> i128 {
+        self.round() as i128
+    }
+}
+
+impl FromMicrodollar for f32 {
+    fn to_microdollar(self) -> i128 {
+        self.round() as i128
+    }
+}
+
+
 impl Currency {
     pub fn from_dollars<T: FromDollar>(amount: T) -> Currency {
         Currency(amount.to_microdollar())
     }
 
     pub fn from_cents<T: FromCent>(amount: T) -> Currency {
+        Currency(amount.to_microdollar())
+    }
+
+    pub fn from_microdollars<T: FromMicrodollar>(amount: T) -> Currency {
         Currency(amount.to_microdollar())
     }
 
@@ -111,6 +167,14 @@ impl Currency {
         let dollars = self.0 as f32 / DOLLAR_TO_MICRODOLLAR as f32;
 
         (dollars * 100.0).round() / 100.0
+    }
+
+    pub fn as_string_dollars(self) -> String {
+        let dollars = self.0 as f32 / DOLLAR_TO_MICRODOLLAR as f32;
+
+        let money = (dollars * 100.0).round() / 100.0;
+
+        format!("{:.2}", money)
     }
 
 }

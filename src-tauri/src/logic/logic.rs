@@ -1,7 +1,7 @@
 use std::{num::NonZeroU32, thread::sleep, time::{Duration, Instant}};
 use tauri::{AppHandle, Manager};
 
-use crate::{logic::game::{generate_world, main}, new_game::{Register, RegisterData}};
+use crate::{interface::register::{Register, RegisterData}, logic::game::{generate_world, main} };
 
 #[cfg(debug_assertions)]
 static UPDATES_PER_SECOND: NonZeroU32 = NonZeroU32::new(10).unwrap();
