@@ -1,7 +1,3 @@
-# Tauri + React + Typescript
+# SimIndustries
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+This game is going to be an offline business simulator designed to be played passively with and against other reactive and reponsive AI companies that play based off stimuli from the player and each other.
