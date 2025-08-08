@@ -39,7 +39,8 @@ pub struct AssetId(pub u64);
 pub struct Production {
     pub produces: Good,
     pub rate_per_hour: f32,
-    pub last_production_tick: u64
+    pub last_production_tick: u64,
+    pub production: f32
 }
 
 #[derive(Component)]

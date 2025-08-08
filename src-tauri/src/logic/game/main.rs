@@ -7,7 +7,7 @@ use tauri::{ AppHandle, Emitter, Manager };
 
 use crate::{
     core::{ Assets, Company, Factory, Inventory, Player, WorldData },
-    interface::retrieve_data::{RetrieveData, RetrieveType},
+    interface::retrieve_data::{ RetrieveData, RetrieveType },
     logic::game::systems::produce_goods,
 };
 
@@ -94,7 +94,7 @@ struct Asset {
     asset_type: String,
     value: String,
     production: Option<String>,
-    has_inventory: bool
+    has_inventory: bool,
 }
 
 fn emit_data(world_data: &mut WorldData, app: &AppHandle) {
@@ -113,10 +113,6 @@ fn emit_data(world_data: &mut WorldData, app: &AppHandle) {
         let player = world_data.world.get_unique::<&Player>().unwrap();
         let player_id = *world_data.companies.get(&player.0).unwrap();
         let player_assets = &assets.get(player_id).unwrap().0;
-        let has_inventory = match &inventory.get(player_id) {
-            Ok(_) => true,
-            Err(_) => false
-        };
 
         let assets: Vec<_> = player_assets
             .par_iter()
@@ -128,23 +124,16 @@ fn emit_data(world_data: &mut WorldData, app: &AppHandle) {
                     Some(ok) => Some(ok.to_string()),
                     None => None,
                 };
-    
-             
+                let has_inventory = inventory.get(asset.entity_id).is_ok();
 
                 Asset {
                     asset_type,
                     value,
                     production,
-                    has_inventory
+                    has_inventory,
                 }
             })
             .collect();
         app.emit("playerAssetData", assets).unwrap_or_default();
     }
-
-    if let Some(inventory) = state.data.iter().find(|item| matches!(item, RetrieveType::Inventory(_))) {
-        if let RetrieveType::Inventory(id) = inventory {
-
-        }
-    };
 }

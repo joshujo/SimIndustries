@@ -1,7 +1,7 @@
 use shipyard::{self, Component};
 use enum_derived::{self, Rand};
 
-#[derive(Rand, Clone, Copy, PartialEq)]
+#[derive(Rand, Clone, Copy, PartialEq, Debug)]
 pub enum Good {
     Apples,
     SulfuricAcid,
@@ -22,5 +22,5 @@ impl std::fmt::Display for Good {
     }
 }
 
-#[derive(Component)]
+#[derive(Component, Debug)]
 pub struct Goods(pub Good, pub u32);

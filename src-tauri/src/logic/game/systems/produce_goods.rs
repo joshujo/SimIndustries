@@ -12,15 +12,23 @@ pub fn produce_goods(world_data: &mut WorldData) {
         .for_each(|(inventory, _, production)| {
             let production_type = production.produces;
 
-            let tick_per_production = ((60.0 / world_data.time_scale as f32 * 3600.0) / production.rate_per_hour).round() as u64;
+            let tick_per_production = (60.0 / world_data.time_scale as f32 * 3600.0) / production.rate_per_hour;
 
             let ticks_since_last = world_data.tick - production.last_production_tick;
 
-            let production_ticks = ticks_since_last / tick_per_production;
+            let production_ticks = ticks_since_last as f32 / tick_per_production;
 
-            inventory.add(production_type, production_ticks as u32);
+            production.production += production_ticks;
+
+            inventory.add(production_type, extract_int(&mut production.production));
 
             production.last_production_tick = world_data.tick;
         });
     
+}
+
+fn extract_int(amount: &mut f32) -> u32 {
+    let int = amount.trunc() as u32;
+    *amount -= int as f32;
+    int
 }

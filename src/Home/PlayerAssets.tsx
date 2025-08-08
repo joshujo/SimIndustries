@@ -1,3 +1,4 @@
+import { Box, Button, Modal } from "@mui/material";
 import { invoke } from "@tauri-apps/api/core";
 import { listen, UnlistenFn } from "@tauri-apps/api/event";
 import { useEffect, useRef, useState } from "react";
@@ -60,8 +61,33 @@ function AssetCard(props: Asset) {
         props.production ? (<p>Production: {props.production}</p>) : (<></>)
       }
       {
-        props.hasInventory && <button>Inventory</button>
+        props.hasInventory && <InventoryModel />
       }
     </div>
   );
+}
+
+interface Inventory {
+
+}
+
+function InventoryModel() {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  return(
+    <div>
+      <Button onClick={handleOpen}>Inventory</Button>
+      <Modal
+    open={open}
+    onClose={handleClose}
+    aria-labelled-by="Inventory Title"
+    >
+      <div className="inventory-modal">
+
+      </div>
+    </Modal>
+    </div>
+  )
 }
