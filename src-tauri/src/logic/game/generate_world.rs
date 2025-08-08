@@ -89,7 +89,8 @@ fn generate_company(
             AssetBelongsTo(id),
             Production {
                 produces: good_production,
-                rate_per_hour: random_range(60.0..=600.0)
+                rate_per_hour: random_range(60.0..=600.0),
+                last_production_tick: 0,
             },
             Inventory(Vec::new())
         ));
@@ -165,7 +166,8 @@ fn generate_player(
         let value = Currency::from_dollars(random_range(250000..=5000000));
         let production = Production {
             produces: Good::rand(),
-            rate_per_hour: random_range(120.0..=1200.0)
+            rate_per_hour: random_range(2000.0..=3000.0),
+            last_production_tick: 0
         };
 
         let entity_id = world.add_entity((

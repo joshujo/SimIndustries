@@ -15,5 +15,5 @@ pub use goods::*;
 
 
 
-pub static COMPANY_ID_GENERATOR: AtomicU64 = AtomicU64::new(0);
+pub static COMPANY_ID_GENERATOR: AtomicU64 = AtomicU64::new(1);
 pub static ASSET_ID_GENERATOR: AtomicU64 = AtomicU64::new(0);

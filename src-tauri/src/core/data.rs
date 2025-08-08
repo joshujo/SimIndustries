@@ -11,7 +11,8 @@ pub struct WorldData {
     pub companies: HashMap<u64, EntityId>,
     pub tick: u64,
     pub time_scale: u32,
-    pub time: PrimitiveDateTime
+    pub time: PrimitiveDateTime,
+    pub unowned_assets: HashMap<u64, EntityId>
 }
 
 impl WorldData {
@@ -33,7 +34,8 @@ impl WorldData {
             companies,
             tick: 0,
             time_scale,
-            time
+            time,
+            unowned_assets: HashMap::new()
         }
     }
 

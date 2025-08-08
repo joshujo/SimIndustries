@@ -6,7 +6,7 @@ type Asset = {
   type: string;
   value: string;
   production?: null | string;
-  numberOfItems?: null | number;
+  hasInventory: boolean
 };
 
 
@@ -35,7 +35,7 @@ export default function PlayerAssets() {
     <h1>Player Assets</h1>
     {
         assetData ? (
-            <div>
+            <div className="asset-card-container">
                 {
                     assetData.map((data, index) => (
                         
@@ -55,7 +55,13 @@ function AssetCard(props: Asset) {
   return (
     <div className="asset-card">
       <p>Type: {props.type}</p>
-      <p>Value: {props.value}</p>
+      <p>Value: ${props.value}</p>
+      {
+        props.production ? (<p>Production: {props.production}</p>) : (<></>)
+      }
+      {
+        props.hasInventory && <button>Inventory</button>
+      }
     </div>
   );
 }
