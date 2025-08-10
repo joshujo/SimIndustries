@@ -1,6 +1,6 @@
 use shipyard::{Component, Unique};
 
-use crate::core::{AssetId, Currency};
+use crate::core::{AssetId, CompanyId, Currency};
 
 #[derive(Component)]
 pub struct Company {
@@ -9,10 +9,7 @@ pub struct Company {
 }
 
 #[derive(Component)]
-pub struct CompanyId(pub u64);
-
-#[derive(Component)]
-pub struct Assets(pub Vec<u64>);
+pub struct Assets(pub Vec<AssetId>);
 
 #[derive(Component, Unique)]
-pub struct Player(pub u64);
+pub struct Player(pub CompanyId);

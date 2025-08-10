@@ -30,7 +30,7 @@ pub fn run() {
         })
         .plugin(tauri_plugin_opener::init())
         .manage(Register::new())
-        .manage(Mutex::new(RetrieveData::default()))
+        .manage(RetrieveData::default())
         .invoke_handler(tauri::generate_handler![
             greet, 
             register,

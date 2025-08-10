@@ -1,6 +1,6 @@
 use shipyard::Component;
 
-use crate::core::{goods::Good, Currency, Goods};
+use crate::core::{goods::Good, CompanyId, Currency, Goods};
 
 pub enum AssetType {
     Headquarters,
@@ -29,11 +29,7 @@ pub struct Factory {
 }
 
 #[derive(Component)]
-pub struct AssetBelongsTo(pub u64);
-
-
-#[derive(Component)]
-pub struct AssetId(pub u64);
+pub struct AssetBelongsTo(pub CompanyId);
 
 #[derive(Component, Clone, Copy)]
 pub struct Production {

@@ -1,22 +1,22 @@
-use std::collections::HashMap;
+use ahash::AHashMap;
 use time::{self, Date, Duration, PrimitiveDateTime, Time};
 
 use shipyard::{EntityId, World};
 
-use crate::core::{AssetType, Currency, Good};
+use crate::core::{AssetId, AssetType, CompanyId, Currency, Good};
 
 pub struct WorldData {
     pub world: World,
-    pub assets: HashMap<u64, AssetData>,
-    pub companies: HashMap<u64, EntityId>,
+    pub assets: AHashMap<AssetId, AssetData>,
+    pub companies: AHashMap<CompanyId, EntityId>,
     pub tick: u64,
     pub time_scale: u32,
     pub time: PrimitiveDateTime,
-    pub unowned_assets: HashMap<u64, EntityId>
+    pub unowned_assets: AHashMap<AssetId, EntityId>
 }
 
 impl WorldData {
-    pub fn new(world: World, assets: HashMap<u64, AssetData>, companies: HashMap<u64, EntityId>) -> Self {
+    pub fn new(world: World, assets: AHashMap<AssetId, AssetData>, companies: AHashMap<CompanyId, EntityId>) -> Self {
 
         #[cfg(not(debug_assertions))]
         let time_scale: u32 = 1;
@@ -35,7 +35,7 @@ impl WorldData {
             tick: 0,
             time_scale,
             time,
-            unowned_assets: HashMap::new()
+            unowned_assets: AHashMap::new()
         }
     }
 

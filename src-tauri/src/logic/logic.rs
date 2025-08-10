@@ -32,7 +32,7 @@ impl TickSystem {
         let next_tick = self.start + self.interval * self.tick_count;
         let now = Instant::now();
 
-        if next_tick - now == Duration::from_secs(1) {
+        if next_tick - now > Duration::from_secs(1) {
             self.start = Instant::now()
         }
 
