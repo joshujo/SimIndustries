@@ -1,15 +1,19 @@
 use shipyard::{IntoIter, View, ViewMut};
 use rayon::prelude::*;
 
-use crate::core::{Factory, Inventory, Production, WorldData};
+use crate::core::{AssetBelongsTo, Factory, Inventory, Production, WorldData};
 
 pub fn produce_goods(world_data: &mut WorldData) {
     let world = &mut world_data.world;
 
-    let (mut inventory, factory, mut production) = world.borrow::<(ViewMut<Inventory>, View<Factory>, ViewMut<Production>)>().unwrap();
+    let (mut inventory, asset_belongs_to, factory, mut production) = world.borrow::<(ViewMut<Inventory>, View<AssetBelongsTo>, View<Factory>, ViewMut<Production>)>().unwrap();
 
-    (&mut inventory, &factory, &mut production).par_iter()
-        .for_each(|(inventory, _, production)| {
+    (&mut inventory, &asset_belongs_to, &factory, &mut production).par_iter()
+        .for_each(|(inventory, asset_belongs_to, _, production)| {
+            if asset_belongs_to.0 == 0 {
+                return;
+            }
+
             let production_type = production.produces;
 
             let tick_per_production = (60.0 / world_data.time_scale as f32 * 3600.0) / production.rate_per_hour;

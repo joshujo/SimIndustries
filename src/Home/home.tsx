@@ -1,6 +1,7 @@
 import PlayerData from "./PlayerData";
 import DateTimePanel from "./DateTimePanel";
 import PlayerAssets from "./PlayerAssets";
+import BuyAssets from "./BuyAssets";
 
 export default function Home() {
 
@@ -9,6 +10,7 @@ export default function Home() {
             <PlayerData/>
             <DateTimePanel/>
             <PlayerAssets />
+            <BuyAssets />
         </div>
     )
 }

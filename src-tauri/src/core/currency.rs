@@ -8,7 +8,7 @@ const CENTS_TO_MICRODOLLAR: i128 = 10000;
 #[derive(Debug, Default, Hash, PartialEq, Eq, PartialOrd, Ord, Clone, Copy, Serialize, Deserialize)]
 pub struct Currency(i128);
 
-trait FromDollar {
+pub trait FromDollar {
     fn to_microdollar(self) -> i128;
 }
 
@@ -60,7 +60,7 @@ impl FromDollar for f32 {
     }
 }
 
-trait FromCent {
+pub trait FromCent {
     fn to_microdollar(self) -> i128;
 }
 

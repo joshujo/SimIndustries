@@ -73,6 +73,8 @@ function InventoryModel(props: { id: number }) {
   let [inventory, setInventory] = useState<Inventory[] | null>(null);
 
   useEffect(() => {
+    if(!open) return;
+
     listen<Inventory[]>("inventoryData" + id, (event) => {
       setInventory(event.payload);
     }).then((unlistenFn) => {
@@ -87,7 +89,7 @@ function InventoryModel(props: { id: number }) {
       }
       invoke("unsub_retrieve_inventory_data", { id: id });
     };
-  }, [id]);
+  }, [id, open]);
 
   const renderInventory = () =>
     inventory?.map((data, index) => (

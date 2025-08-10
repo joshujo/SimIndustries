@@ -51,3 +51,15 @@ impl Borrow<u64> for AssetId {
         &self.0
     }
 }
+
+impl PartialEq<u64> for CompanyId {
+    fn eq(&self, other: &u64) -> bool {
+        self.0 == *other
+    }
+}
+
+impl PartialEq<u64> for AssetId {
+    fn eq(&self, other: &u64) -> bool {
+        self.0 == *other
+    }
+}

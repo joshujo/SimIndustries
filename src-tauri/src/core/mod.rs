@@ -6,8 +6,6 @@ mod data;
 mod goods;
 mod identification;
 
-use std::sync::atomic::AtomicU64;
-
 pub use company::*;
 pub use assets::*;
 pub use currency::Currency;

@@ -3,7 +3,6 @@ pub mod interface;
 pub mod core;
 pub mod server;
 pub mod logic;
-use parking_lot::Mutex;
 
 use interface::{register::register, retrieve_data::*};
 

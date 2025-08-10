@@ -1,7 +1,6 @@
 use std::sync::Arc;
 
 use arc_swap::ArcSwap;
-use parking_lot::Mutex;
 
 #[derive(PartialEq, Clone, Copy)]
 pub enum RetrieveType {
